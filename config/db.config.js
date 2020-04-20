@@ -2,8 +2,8 @@ var mysql = require('mysql');
 // Db Credentials 
 
 const DB_Credentials = require ('../app/Credentials/DBCredentials');
-
-const DB_Connection = DB_Credentials.CredentialsTwo;
+// change your credentials 
+const DB_Connection = DB_Credentials.CredentialsOne;
 const connection = mysql.createConnection({
     host: DB_Connection.host,
     port: DB_Connection.port,
