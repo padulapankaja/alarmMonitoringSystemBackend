@@ -1,5 +1,5 @@
 //import User model
-const User = require('../models/user.model');
+const Users = require('../models/users.model');
 
 // test functions
 exports.test = function (req, res) {

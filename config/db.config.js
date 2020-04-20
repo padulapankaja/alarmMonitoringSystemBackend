@@ -3,14 +3,16 @@ var mysql = require('mysql');
 
 const DB_Credentials = require ('../app/Credentials/DBCredentials');
 
-
+const DB_Connection = DB_Credentials.CredentialsTwo;
 const connection = mysql.createConnection({
-    host: DB_Credentials.CredentialsOne.host,
-    port: DB_Credentials.CredentialsOne.port,
-    user: DB_Credentials.CredentialsOne.user,
-    password: DB_Credentials.CredentialsOne.password,
-    database: DB_Credentials.CredentialsOne.dbname
+    host: DB_Connection.host,
+    port: DB_Connection.port,
+    user: DB_Connection.user,
+    password: DB_Connection.password,
+    database: DB_Connection.dbname,
+    multipleStatements:true ,
 });
+
 connection.connect((err) => {
     if (err) 
         throw err;
