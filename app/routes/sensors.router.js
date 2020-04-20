@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 
-const  SensorsController  = require('../controllers/sensors.controller');
+const SensorsController = require('../controllers/sensors.controller');
 
 //======================================================================================================
 //===================================  GET REQUEST       ===============================================
