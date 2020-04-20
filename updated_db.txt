@@ -22,7 +22,6 @@ CREATE TABLE `sensors_log` (
   `sensor_id` int(11) DEFAULT NULL,
   `smoke_level` int(11) DEFAULT 0,
   `co2_level` int(11) DEFAULT NULL,
-  `date` date ,
-  `time` time ,
+  `datetime` datetime ,
   PRIMARY KEY (`id`)
 )

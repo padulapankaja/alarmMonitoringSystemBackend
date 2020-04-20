@@ -10,7 +10,7 @@ const SensorsController = require('../controllers/sensors.controller');
 
 //get all sensors data
 router.get('/get', SensorsController.getAll);
-
+router.get('/getall/:minutes', SensorsController.getAllForMinutes);
 //get selected sensor data
 router.get('/get/:id', SensorsController.get);
 
