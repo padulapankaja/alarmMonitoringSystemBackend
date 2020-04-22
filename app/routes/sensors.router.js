@@ -13,7 +13,7 @@ router.get('/get', SensorsController.getAll);
 router.get('/getall/:minutes', SensorsController.getAllForMinutes);
 //get selected sensor data
 router.get('/get/:id', SensorsController.get);
-
+router.get('/getall/:id/:minutes', SensorsController.getAllSingle);
 //======================================================================================================
 //===================================  POST REQUEST       ==============================================
 //====================================================================================================== 

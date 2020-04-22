@@ -1,5 +1,6 @@
 //import Sensors model
-const {GET_ALL , GET_SENSOR  , INSERT_SENSOR, UPDATE_SENSORS ,UPDATE_SENSORS_LOG , GET_ALL_BY_MINUTES} = require('../models/sensors.model');
+const {GET_ALL , GET_SENSOR  , INSERT_SENSOR, UPDATE_SENSORS ,
+    UPDATE_SENSORS_LOG , GET_SINGLE_ALL_BY_MINUTES ,GET_ALL_BY_MINUTES} = require('../models/sensors.model');
 const connection = require('../../config/db.config');
 const moment = require('moment');
 
@@ -23,7 +24,6 @@ exports.getAllForMinutes = function (req, res) {
     data.from = from;
     data.to = to;
 
-    console.log(data);
     connection.query( GET_ALL , (err , result) => {
         if (err) 
         throw err;
@@ -48,6 +48,38 @@ exports.get = function (req, res) {
             res.end( JSON.stringify({status : 'failed' , message : 'record not found!'}) );
         }else{
             res.end( JSON.stringify({status : 'success' , data : result[0]  } )); 
+        }       
+    });   
+};
+
+exports.getAllSingle = function (req, res) {
+    const id = [req.params.id];
+    const minutes = req.params.minutes;
+    const now = new Date();
+    var to  = moment(now).format('YYYY-MM-DD HH:mm:ss');
+    var from = moment(now).subtract( minutes, "minutes").toDate();
+    from =  moment(from).format('YYYY-MM-DD HH:mm:ss');
+
+    var data = {};
+    data.from = from;
+    data.to = to;
+
+    connection.query( GET_SENSOR , id ,  (err , result) => {
+        if (err) 
+        throw err;
+        if(result.length == 0 ){
+            res.end( JSON.stringify({status : 'failed' , message : 'record not found!'}) );
+        }else{
+
+            data.current = result[0];
+            connection.query( GET_SINGLE_ALL_BY_MINUTES , [ from , to , id] ,(err , result) => {
+                if (err) 
+                throw err;
+
+                data.log = result; 
+                res.end( JSON.stringify({status : 'success' , data :  data } )); 
+            });   
+           
         }       
     });   
 };
