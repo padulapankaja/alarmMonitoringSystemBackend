@@ -48,11 +48,13 @@ exports.login = function (req, res, next) {
             if(result.length == 1 ){
                 res.status(200).json({
                     message: 'Login Sucess',
-                    user: result[0]
+                    user: result[0],
+                    status: true
                 })
             }else{
                 res.status(201).json({
                     message: 'No data',
+                    status: true
                    
                 })
             }       
@@ -60,7 +62,8 @@ exports.login = function (req, res, next) {
        
     } else {
         res.status(202).json({
-            message: 'Please sent valid details'
+            message: 'Please sent valid details',
+            status: true
         })
         next()
     }
