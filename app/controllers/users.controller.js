@@ -39,10 +39,11 @@ exports.insert = function (req, res, next) {
 
 //user login  ----------------------------------------------------------------------------------------------------------------------------
 exports.login = function (req, res, next) {
-    const data = req.body;
+    const data = req.body.admin;
+
     console.log(data);
-    if (data.password != undefined && data.email != undefined ) {
-        connection.query(GET_USER_FROM_EMAIL_PASSWORD, [data.email, data.password ], (err, result) => {
+    if (data.uPass != undefined && data.uEmail != undefined ) {
+        connection.query(GET_USER_FROM_EMAIL_PASSWORD, [data.uEmail, data.uPass ], (err, result) => {
             if (err) 
             throw err;
             if(result.length == 1 ){
@@ -54,7 +55,7 @@ exports.login = function (req, res, next) {
             }else{
                 res.status(201).json({
                     message: 'No data',
-                    status: true
+                    status: false
                    
                 })
             }       
@@ -63,7 +64,7 @@ exports.login = function (req, res, next) {
     } else {
         res.status(202).json({
             message: 'Please sent valid details',
-            status: true
+            status: false
         })
         next()
     }
