@@ -17,7 +17,7 @@ router.get('/test', UsersController.test);
 //===================================  POST REQUEST       ==============================================
 //====================================================================================================== 
 
-router.post('/uregister', UsersController.insert);
+router.post('/register', UsersController.insert);
 router.post('/login', UsersController.login);
 
 
