@@ -10,6 +10,7 @@ const  UsersController  = require('../controllers/users.controller');
 
 //test router
 router.get('/test', UsersController.test);
+router.get('/a/all', UsersController.getAllAdmins);
 
 
 
