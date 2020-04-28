@@ -20,13 +20,15 @@ router.get('/getall/:id/:minutes', SensorsController.getAllSingle);
 
 //insert new sensor
 router.post('/insert', SensorsController.insert);
-
 //update sensors data
 router.post('/updateall', SensorsController.updateall);
 
+//======================================================================================================
+//===================================  PATCH REQUEST       ==============================================
+//====================================================================================================== 
 
-
-
+router.patch( '/update' , SensorsController.update );
+router.delete( '/delete/:id' , SensorsController.delete );
 
 //export router
 module.exports = router

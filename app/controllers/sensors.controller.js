@@ -1,5 +1,5 @@
 //import Sensors model
-const {GET_ALL , GET_SENSOR  , INSERT_SENSOR, UPDATE_SENSORS ,
+const {GET_ALL , GET_SENSOR  , INSERT_SENSOR, UPDATE_SENSORS ,UPDATE_SENSOR, DELETE_SENSOR,
     UPDATE_SENSORS_LOG , GET_SINGLE_ALL_BY_MINUTES ,GET_ALL_BY_MINUTES} = require('../models/sensors.model');
 const connection = require('../../config/db.config');
 const moment = require('moment');
@@ -95,6 +95,32 @@ exports.insert = function (req, res) {
     }else{
         res.end( JSON.stringify({status : 'failed' , message : 'wrong fields'}) ); 
     }  
+};
+
+exports.update = function (req, res) {
+     const data = req.body;
+     const updated_at = moment( new Date() ).format('YYYY-MM-DD HH:mm:ss');
+    
+     if( data.floor_id != undefined && data.room_id != undefined  && data.id != undefined ){
+    connection.query( UPDATE_SENSOR , [data.floor_id , data.room_id ,  updated_at , data.id] ,  (err , result) => {
+        if (err) 
+        throw err;
+        console.log(result);
+        res.end( JSON.stringify({status : 'success' , message : 'Successfully Updated'}) ); 
+    }); 
+    }else{
+        res.end( JSON.stringify({status : 'failed' , message : 'Wrong Fields'}) ); 
+    }  
+};
+
+exports.delete = function (req, res) {
+    const id = [req.params.id];
+   connection.query( DELETE_SENSOR , id ,  (err , result) => {
+       if (err) 
+       throw err;
+       res.end( JSON.stringify({status : 'success' , message : 'Successfully Deleted'}) ); 
+   }); 
+
 };
 
 exports.updateall = function (req, res) {
