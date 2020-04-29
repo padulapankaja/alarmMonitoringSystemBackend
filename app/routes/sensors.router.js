@@ -26,7 +26,12 @@ router.post('/updateall', SensorsController.updateall);
 
 
 // sent warning email when sensor come danget level
-router.get('/warning', SensorsController.sentWarningEmail);
+router.get('/warning/email', SensorsController.sentWarningEmail);
+// sent warning email when sensor come danget level
+router.get('/warning/sms', SensorsController.sentWarningSMS);
+// sent warning call when sensor come danget level
+router.get('/warning/call', SensorsController.sentCallAlert);
+
 
 
 //export router
