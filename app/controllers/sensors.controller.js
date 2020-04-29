@@ -3,6 +3,8 @@ const {GET_ALL , GET_SENSOR  , INSERT_SENSOR, UPDATE_SENSORS ,
     UPDATE_SENSORS_LOG , GET_SINGLE_ALL_BY_MINUTES ,GET_ALL_BY_MINUTES} = require('../models/sensors.model');
 const connection = require('../../config/db.config');
 const moment = require('moment');
+const UtilObj = require('../util/util')
+
 
 exports.getAll = function (req, res) {
     connection.query( GET_ALL , (err , result) => {
@@ -124,3 +126,26 @@ exports.updateall = function (req, res) {
 };
 
 
+
+
+
+
+
+
+//sent email when sensor come to danger zone ----------------------------------------------------------------------------------------------------------------------------
+exports.sentWarningEmail = function (req, res, next) {
+
+    var uEmail =  "padulaguruge@gmail.com";
+    var id = "10";
+    var co2 = "5";
+    var smoke = "6";
+
+
+     UtilObj.sentEmailDanSenesors(uEmail, id, co2, smoke)
+
+   
+
+    
+
+
+}

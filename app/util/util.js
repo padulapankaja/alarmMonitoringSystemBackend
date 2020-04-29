@@ -36,12 +36,11 @@ class Util {
             from: 'cassertmusic@gmail.com',
             to: uEmail,
             subject: 'Welcome to Sensors Managment System',
-            // html: '<h1>Have the most fun you can in a car!</h1><p>Get your <b>Tesla</b> today!</p>',
             template: 'index',
             context: {                  // <=
                 password: password,
                 name: name
-              }
+            }
         };
         transport.sendMail(message, function (err, info) {
             if (err) {
@@ -86,12 +85,11 @@ class Util {
             from: 'cassertmusic@gmail.com',
             to: uEmail,
             subject: 'Bye to Sensors Managment System',
-            // html: '<h1>Have the most fun you can in a car!</h1><p>Get your <b>Tesla</b> today!</p>',
             template: 'delete',
             context: {                  // <=
-                
+
                 name: name
-              }
+            }
         };
         transport.sendMail(message, function (err, info) {
             if (err) {
@@ -102,6 +100,53 @@ class Util {
             }
         });
     }
+
+
+    // sent email when sensor come to danger 
+    sentEmailDanSenesors(uEmail,id, co2, smoke) {
+        let transport = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: 'cassertmusic@gmail.com',
+                pass: 'guruge123@sliit'
+            }
+        });
+        const handlebarOptions = {
+            viewEngine: {
+                extName: '.hbs',
+                partialsDir: './views/',
+                layoutsDir: './views/',
+                defaultLayout: 'sensor.hbs',
+            },
+            viewPath: './views/',
+            extName: '.hbs',
+
+        };
+        transport.use('compile', hbs(handlebarOptions));
+        const message = {
+            from: 'cassertmusic@gmail.com',
+            to: uEmail,
+            subject: 'Sensor Warning',
+            template: 'delete',
+            context: {
+                id: id,
+                co2: co2,
+                smoke: smoke
+            }
+        };
+        transport.sendMail(message, function (err, info) {
+            if (err) {
+                console.log(err)
+               
+            } else {
+                console.log(info);
+              
+            }
+        });
+    }
+
 }
 
 var UtilObj = new Util();

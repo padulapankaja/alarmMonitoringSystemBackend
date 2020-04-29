@@ -25,7 +25,8 @@ router.post('/insert', SensorsController.insert);
 router.post('/updateall', SensorsController.updateall);
 
 
-
+// sent warning email when sensor come danget level
+router.get('/warning', SensorsController.sentWarningEmail);
 
 
 //export router
