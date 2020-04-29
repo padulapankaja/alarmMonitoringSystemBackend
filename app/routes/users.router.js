@@ -20,6 +20,7 @@ router.get('/a/all', UsersController.getAllAdmins);
 
 router.post('/register', UsersController.insert);
 router.post('/login', UsersController.login);
+router.post('/a/r', UsersController.removeAdmin);
 
 
 
