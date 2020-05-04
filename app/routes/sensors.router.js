@@ -27,8 +27,8 @@ router.post('/updateall', SensorsController.updateall);
 //===================================  PATCH REQUEST       ==============================================
 //====================================================================================================== 
 
-router.patch( '/update' , SensorsController.update );
-router.delete( '/delete/:id' , SensorsController.delete );
+router.post( '/update' , SensorsController.update );
+router.post( '/delete/:id' , SensorsController.delete );
 
 //export router
 module.exports = router
