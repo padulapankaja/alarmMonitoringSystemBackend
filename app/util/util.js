@@ -5,10 +5,17 @@ class Util {
 
     constructor() {
 
+        this.sms = {
+            accountSid: "AC82d4e07b438b39c31199300aa61a5c8d",
+            authToken: "3ee830c883b28d91e31075914f2f9fda",
 
-
-
+        };
     }
+
+    // ===========================================================================================
+    // ===========================Email Sent     =================================================
+    // ===========================================================================================
+
     // sent email for regiter users
     sentEmailforRegisterUsers(uEmail, password, name) {
         let transport = nodemailer.createTransport({
@@ -36,12 +43,11 @@ class Util {
             from: 'cassertmusic@gmail.com',
             to: uEmail,
             subject: 'Welcome to Sensors Managment System',
-            // html: '<h1>Have the most fun you can in a car!</h1><p>Get your <b>Tesla</b> today!</p>',
             template: 'index',
             context: {                  // <=
                 password: password,
                 name: name
-              }
+            }
         };
         transport.sendMail(message, function (err, info) {
             if (err) {
@@ -52,11 +58,6 @@ class Util {
             }
         });
     }
-
-
-
-
-
 
 
     // sent email for deleted users 
@@ -86,12 +87,11 @@ class Util {
             from: 'cassertmusic@gmail.com',
             to: uEmail,
             subject: 'Bye to Sensors Managment System',
-            // html: '<h1>Have the most fun you can in a car!</h1><p>Get your <b>Tesla</b> today!</p>',
             template: 'delete',
             context: {                  // <=
-                
+
                 name: name
-              }
+            }
         };
         transport.sendMail(message, function (err, info) {
             if (err) {
@@ -102,6 +102,81 @@ class Util {
             }
         });
     }
+
+    // sent email when sensor come to danger 
+    sentEmailDanSenesors(uEmail, id, co2, smoke) {
+        let transport = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: 'cassertmusic@gmail.com',
+                pass: 'guruge123@sliit'
+            }
+        });
+        const handlebarOptions = {
+            viewEngine: {
+                extName: '.hbs',
+                partialsDir: './views/',
+                layoutsDir: './views/',
+                defaultLayout: 'sensor.hbs',
+            },
+            viewPath: './views/',
+            extName: '.hbs',
+
+        };
+        transport.use('compile', hbs(handlebarOptions));
+        const message = {
+            from: 'cassertmusic@gmail.com',
+            to: uEmail,
+            subject: 'Sensor Warning',
+            template: 'delete',
+            context: {
+                id: id,
+                co2: co2,
+                smoke: smoke
+            }
+        };
+        transport.sendMail(message, function (err, info) {
+            if (err) {
+                console.log(err)
+
+            } else {
+                console.log(info);
+
+            }
+        });
+    }
+    // ===========================================================================================
+    // ===========================SMS  Sent     =================================================
+    // ===========================================================================================
+
+
+    sentSMSAlert(id, co2, smoke) {
+        var twilio = require('twilio');
+        var client = new twilio(this.sms.accountSid, this.sms.authToken);
+        client.messages.create({
+            body: `This is warning from Sensor Managment System !   Sensor ID :  ${id}  |  Co2 Level :  ${co2} |  Smoke Level :  ${smoke}   `,
+            to: '+94717269086',  // Text this number
+            from: '+12512921823' // From a valid Twilio number
+        }).then((message) => console.log(message.sid));
+    }
+
+    // ===========================================================================================
+    // ===========================Call  Sent     =================================================
+    // ===========================================================================================
+    sentCallAlert() {
+        var twilio = require('twilio');
+        var client = new twilio(this.sms.accountSid, this.sms.authToken);
+        client.calls
+            .create({
+                url: 'http://demo.twilio.com/docs/voice.xml',
+                to: '+94717269086',
+                from: '+12512921823'
+            })
+            .then(call => console.log(call.sid));
+    }
+
 }
 
 var UtilObj = new Util();
