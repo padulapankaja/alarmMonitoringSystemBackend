@@ -20,9 +20,15 @@ router.get('/getall/:id/:minutes', SensorsController.getAllSingle);
 
 //insert new sensor
 router.post('/insert', SensorsController.insert);
-
 //update sensors data
 router.post('/updateall', SensorsController.updateall);
+
+//======================================================================================================
+//===================================  PATCH REQUEST       ==============================================
+//====================================================================================================== 
+
+router.post( '/update' , SensorsController.update );
+router.post( '/delete/:id' , SensorsController.delete );
 
 
 // sent warning email when sensor come danget level

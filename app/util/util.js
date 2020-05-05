@@ -7,7 +7,7 @@ class Util {
 
         this.sms = {
             accountSid: "AC82d4e07b438b39c31199300aa61a5c8d",
-            authToken: "3ee830c883b28d91e31075914f2f9fda",
+            authToken: "4ae05f822c42e9faec21d052fcf24ef0",
 
         };
     }
@@ -156,8 +156,8 @@ class Util {
         var twilio = require('twilio');
         var client = new twilio(this.sms.accountSid, this.sms.authToken);
         client.messages.create({
-            body: `This is warning from Sensor Managment System !   Sensor ID :  ${id}  |  Co2 Level :  ${co2} |  Smoke Level :  ${smoke}   `,
-            to: '+94717269086',  // Text this number
+            body: `                                             Alert                                             Sensor ID :  ${id}                                               Co2 Level :  ${co2} |  Smoke Level :  ${smoke}   `,
+            to: '+94769374442',  // Text this number
             from: '+12512921823' // From a valid Twilio number
         }).then((message) => console.log(message.sid));
     }
@@ -171,7 +171,7 @@ class Util {
         client.calls
             .create({
                 url: 'http://demo.twilio.com/docs/voice.xml',
-                to: '+94717269086',
+                to: '+94769374442',
                 from: '+12512921823'
             })
             .then(call => console.log(call.sid));
