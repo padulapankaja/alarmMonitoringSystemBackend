@@ -29,6 +29,8 @@ router.post('/updateall', SensorsController.updateall);
 
 router.post( '/update' , SensorsController.update );
 router.post( '/delete/:id' , SensorsController.delete );
+
+
 // sent warning email when sensor come danget level
 router.get('/warning/email', SensorsController.sentWarningEmail);
 // sent warning email when sensor come danget level
